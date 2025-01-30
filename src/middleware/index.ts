@@ -17,9 +17,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
     if (context.cookies.has('test')) {
         const test = context.cookies.get('test', { decode });
         console.log('test:', test?.value);
+        const test2 = context.cookies.get('test2', { decode });
+        console.log('test2:', test2?.value);
     } else {
         const tomorrow = new Date(Date.now() + 1000 * 60 * 60 * 24);
         context.cookies.set('test', 'test_value', { encode, path: '/', expires: tomorrow });
+        context.cookies.set('test2', 'test_value_2', { encode, path: '/', expires: tomorrow });
     }
 
     return next();
